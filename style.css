@@ -1,0 +1,21 @@
+/* style.css - simple layout */
+body{
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  line-height:1.5;
+  margin:0;
+  padding:2rem;
+  background: #f6f8fa;
+  color:#111;
+}
+header{ margin-bottom:1.5rem; }
+h1{ font-size:2rem; margin:0 0 .25rem 0; }
+button{
+  background:#1f6feb;
+  color:white;
+  border:none;
+  padding:.6rem 1rem;
+  border-radius:6px;
+  cursor:pointer;
+}
+#msg{ margin-top:1rem; font-weight:600; }
+
