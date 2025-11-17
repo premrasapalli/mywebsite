@@ -37,4 +37,4 @@ jobs:
           SOURCE_DIR="."
           DEST_DIR="/var/www/mywebsite/"
 
-          rsync -avz --delete \
+          rsync -a
