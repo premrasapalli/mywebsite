@@ -37,6 +37,10 @@ jobs:
           DEST_DIR="/var/www/mywebsite/"
 
           rsync -avz --delete \
-            --no-owner --no-group --chmod=Du=rwx,Dgo=rx,Fu=rw,Fgo=r \
+            --no-owner --no-group \
+            --omit-dir-times \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --chmod=Du=rwx,Dgo=rx,Fu=rw,Fgo=r \
             -e "ssh -o StrictHostKeyChecking=yes" \
             "$SOURCE_DIR/" "$USER@$HOST:$DEST_DIR"
