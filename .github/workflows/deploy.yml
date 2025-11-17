@@ -26,8 +26,7 @@ jobs:
           chmod 644 ~/.ssh/known_hosts
 
       - name: Build (optional)
-        run: |
-          echo "No build step configured."
+        run: echo "No build step configured."
 
       - name: Sync files to EC2 with rsync
         env:
@@ -37,4 +36,7 @@ jobs:
           SOURCE_DIR="."
           DEST_DIR="/var/www/mywebsite/"
 
-          rsync -a
+          rsync -avz --delete \
+            --no-owner --no-group --chmod=Du=rwx,Dgo=rx,Fu=rw,Fgo=r \
+            -e "ssh -o StrictHostKeyChecking=yes" \
+            "$SOURCE_DIR/" "$USER@$HOST:$DEST_DIR"
