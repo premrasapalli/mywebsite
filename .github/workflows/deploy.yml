@@ -27,7 +27,6 @@ jobs:
 
       - name: Build (optional)
         run: |
-          # Add your build step here (npm build, hugo build, etc)
           echo "No build step configured."
 
       - name: Sync files to EC2 with rsync
@@ -42,6 +41,7 @@ jobs:
             --exclude='.git' \
             --exclude='.github' \
             --exclude='node_modules' \
+            -e "ssh -o StrictHostKeyChecking=yes" \
             $SOURCE_DIR/ $USER@$HOST:$DEST_DIR
 
       - name: Fix permissions and reload nginx
@@ -49,4 +49,4 @@ jobs:
           HOST: ${{ secrets.DEPLOY_HOST }}
           USER: ${{ secrets.DEPLOY_USER }}
         run: |
-          ssh $USER@$HOST "sudo chown -R www-data:www-data /var/www/mywebsite && sudo systemctl reload nginx"
+          ssh -o StrictHostKeyChecking=yes $USER@$HOST "sudo chown -R www-data:www-data /var/www/mywebsite && sudo systemctl reload nginx"
