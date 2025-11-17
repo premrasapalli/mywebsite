@@ -38,15 +38,3 @@ jobs:
           DEST_DIR="/var/www/mywebsite/"
 
           rsync -avz --delete \
-            --exclude='.git' \
-            --exclude='.github' \
-            --exclude='node_modules' \
-            -e "ssh -o StrictHostKeyChecking=yes" \
-            $SOURCE_DIR/ $USER@$HOST:$DEST_DIR
-
-      - name: Fix permissions and reload nginx
-        env:
-          HOST: ${{ secrets.DEPLOY_HOST }}
-          USER: ${{ secrets.DEPLOY_USER }}
-        run: |
-          ssh -o StrictHostKeyChecking=yes $USER@$HOST "sudo chown -R www-data:www-data /var/www/mywebsite && sudo systemctl reload nginx"
